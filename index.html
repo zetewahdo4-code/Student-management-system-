@@ -186,7 +186,7 @@ form .msg{border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);animation:ris
 <label>የአባሉ ፎቶ <small style="font-weight:500;color:var(--mu)">(አማራጭ)</small></label><div class="phsec"><div class="pbox" id="pb-f2" role="button" tabindex="0"><span>＋<br>ፎቶ ለማስገባት ይንኩ</span></div><div class="pbtns"><button type="button" id="cb-f2">📷 Camera</button><button type="button" id="gb-f2">🖼 Gallery</button><button type="button" class="px hid" id="px-f2">✕ አጥፋ</button></div><input type="file" id="gal-f2" accept="image/*" class="hid"><input type="file" id="cam-f2" accept="image/*" capture="user" class="hid"></div>
 <label>3. ማዕረግ</label><div class="row"><label><input type="radio" name="ማዕረግ" value="ካህን" required> ካህን</label><label><input type="radio" name="ማዕረግ" value="ዲያቆን"> ዲያቆን</label><label><input type="radio" name="ማዕረግ" value="መምህር"> መምህር</label><label><input type="radio" name="ማዕረግ" value="ምዕመን"> ምዕመን</label></div>
 <label>4. የትውልድ ከተማ</label><input type="text" name="ትውልድ" required>
-<label>5. የተመረቁበት ዲፓርትመንት</label><input type="text" name="ዲፓርትመንት" required>
+<label>5. የተመረቅህ/ሽበት ዲፓርትመንት</label><input type="text" name="ዲፓርትመንት" required>
 <label>6. መቼ ተመረቁ? (በኢትዮጵያ ዓ.ም)</label>
 <div class="two"><select name="የተመረቁበት" required><option value="">— ዓመት —</option></select><select name="ወር" required><option value="">— ወር —</option></select></div>
 <label>7. Social / Natural</label><div class="row"><label><input type="radio" name="ስቴም" value="Social" required> Social</label><label><input type="radio" name="ስቴም" value="Natural"> Natural</label></div>
@@ -521,16 +521,16 @@ function formHtml2(it,img,logo){var r=it.src,m=formModel(it);
  var bar=function(t){return"<div style='background:"+MAR+";color:#fff;font-weight:bold;text-align:center;padding:7px;border-radius:4px;border-bottom:3px solid "+GLD+";margin:6px 0 8px'>"+t+"</div>"};
  var cell="padding:7px 12px;border:1px solid "+LNE+";vertical-align:middle;white-space:normal;overflow-wrap:anywhere";
  var pcell="<td rowspan='"+m.length+"' style='width:164px;vertical-align:top;text-align:center;padding:10px 8px;border:1px solid "+LNE+";background:linear-gradient(180deg,#fffdf8,"+CRM+")'><div style='font-weight:bold;color:"+MAR+";font-size:14px;padding-bottom:5px;border-bottom:2px solid "+GLD+";display:inline-block;margin-bottom:14px'>የአባሉ ፎቶ</div><div style='position:relative;width:134px;height:168px;box-sizing:border-box;border:4px solid "+GLD+";border-radius:6px;padding:4px;background:linear-gradient(135deg,#fff,"+CRM+");margin:0 auto;box-shadow:0 4px 10px rgba(0,0,0,.22)'>"+dia("-7px","-7px")+dia("-7px","auto","-7px")+dia("auto","-7px",0,"-7px")+dia("auto","auto","-7px","-7px")+"<div style='width:100%;height:100%;box-sizing:border-box;border:1.5px solid "+MAR+";background:#fff;display:flex;align-items:center;justify-content:center'>"+(ph||"<span style='color:#aaa;font-size:13px'>ፎቶ</span>")+"</div></div></td>";
- var rows=m.map(function(row,i){var c,bg=i%2?"#fcf9f2":"#fff";
+ var rows=m.map(function(row,i){var c,bg=i%2?"rgba(250,244,230,.5)":"transparent";
   if(row.t==="t")c=fesc(row.v);
   else if(row.t==="o")c="<div style='display:flex;flex-wrap:wrap;gap:4px 14px'>"+row.o.map(function(o){return"<span style='white-space:nowrap;"+(o.on?"font-weight:bold;color:#222":"color:#666")+"'>"+cbx(o.on)+fesc(o.x)+"</span>"}).join("")+"</div>";
   else c=sg;
   return"<tr><td style='"+cell+";"+(i===0?"width:29%;":"")+"font-weight:bold;color:"+MAR+";background:"+CRM+"'>"+(i+1)+". "+fesc(row.l)+"</td><td style='"+cell+";background:"+bg+"'>"+c+"</td>"+(i===0?pcell:"")+"</tr>"}).join("");
- var tbl="<table style='width:100%;border-collapse:collapse;table-layout:fixed'>"+rows+"</table>";
+ var tbl="<div style='position:relative'><div style='position:absolute;left:29%;right:164px;top:0;bottom:0;background-image:url("+WMP+");background-repeat:no-repeat;background-position:center;background-size:76% auto'></div><table style='position:relative;width:100%;border-collapse:collapse;table-layout:fixed'>"+rows+"</table></div>";
  var lab="font-weight:bold;color:"+MAR+";background:"+CRM+";padding:7px 12px;white-space:normal;border:1px solid "+LNE,val="padding:7px 12px;white-space:normal;border:1px solid "+LNE+";background:#fff";
  var decl=it.s?"<p style='margin:10px 0 6px;line-height:1.6'>እኔ ተማሪ <b style='border-bottom:1px solid #000'>&nbsp;"+fesc(r[1])+"&nbsp;</b> ከላይ የጻፍኩት መረጃ ትክክል መሆኑን፣ እንዲሁም የግቢ ጉባኤውን ሥርዓት፣ ደንብና ሕግ አክብሬ ለማገልገል መስማማቴን በፊርማዬ አረጋግጣለሁ።</p><table style='width:100%;border-collapse:collapse;table-layout:fixed'><tr><td style='"+lab+";width:14%'>ፊርማ</td><td style='"+val+";height:56px;width:46%'>"+sg+"</td><td style='"+lab+";width:10%'>ቀን</td><td style='"+val+"'>"+fesc(dOnly(it))+"</td></tr></table>":"";
  var conf="<table style='width:100%;border-collapse:collapse;table-layout:fixed'><tr><td style='"+lab+";width:24%'>ፎርሙን የተቀበለው</td><td style='"+val+";height:36px'></td><td style='"+lab+";width:10%'>ፊርማ</td><td style='"+val+";width:17%'></td><td style='"+lab+";width:8%'>ቀን</td><td style='"+val+";width:14%'></td></tr></table>";
- var wm="<div style='flex:1;min-height:170px;margin:8px 0;background-image:url("+WMP+");background-repeat:no-repeat;background-position:center;background-size:contain'></div>";
+ var wm="<div style='flex:1;min-height:24px'></div>";
  return"<div style='min-height:1150px;display:flex;flex-direction:column'>"+head+rule+meta+bar(it.s?"የተማሪ መረጃ":"የተመራቂ መረጃ")+tbl+decl+bar("የግቢ ጉባኤው ማረጋገጫ")+conf+wm+"<div style='text-align:center;color:"+MAR+";font-weight:bold;border-top:2px solid "+GLD+";padding-top:10px'>የደብረ ስብሐት ቅድስት ሥላሴ የራያ ዩኒቨርስቲ ግቢ ጉባኤ</div></div>"}
 
 /* ---- Word (እውነተኛ .docx) ---- */
@@ -544,7 +544,7 @@ function wT(widths,rows,nb){var bd=nb?["top","left","bottom","right","insideH","
 function wBar(t){return wT([9638],[[wC(wP(wR(t,{b:1,c:"FFFFFF",s:24}),{jc:"center",a:0}),9638,{fill:"7A1F2B"})]])+wP("",{a:40})}
 function docxForm(it,idx,dr,drM,wm){var r=it.src,m=formModel(it),LB="F7F1E5",o="";
  var ph=dr(r[14],104,136),sg=dr(r[15],170,60),lg=drM({d:LOGO,w:LOGOW,h:LOGOH},84,84);
- o+=wP(wm(),{pb:idx>0,a:0});
+ o+=wP(wm(it.s),{pb:idx>0,a:0});
  var tt=wP(wR("የደብረ ስብሐት ቅድስት ሥላሴ",{b:1,s:28,c:"7A1F2B"}),{jc:"center",a:0})+wP(wR("የራያ ዩኒቨርስቲ ግቢ ጉባኤ",{b:1,s:28,c:"7A1F2B"}),{jc:"center",a:0})+wP(wR((it.s?"የተማሪዎች":"የተመራቂዎች")+" መመዝገብያ ቅፅ",{b:1,s:30,c:"7A1F2B"}),{jc:"center",a:0});
  var bx=function(w,k,col,sz,rowH,inner){return'<w:tbl><w:tblPr><w:tblW w:w="'+w+'" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders>'+["top","left","bottom","right"].map(function(q){return'<w:'+q+' w:val="single" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join("")+'</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="'+k+'" w:type="dxa"/><w:left w:w="'+k+'" w:type="dxa"/><w:bottom w:w="'+k+'" w:type="dxa"/><w:right w:w="'+k+'" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="'+w+'"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="'+rowH+'" w:hRule="atLeast"/></w:trPr>'+wC(inner,w,{fill:"FFFFFF"})+'</w:tr></w:tbl>'};
  var inr=bx(1640,40,"7A1F2B",6,2150,wP(ph||wR("ፎቶ",{c:"AAAAAA"}),{jc:"center",a:0}))+wP("",{a:0});
@@ -556,7 +556,7 @@ function docxForm(it,idx,dr,drM,wm){var r=it.src,m=formModel(it),LB="F7F1E5",o="
   if(row.t==="t")c=wP(wR(row.v),{a:0});
   else if(row.t==="o")c=wP(row.o.map(function(x){return wR(x.on?"☑":"☐",{sym:1,s:24,c:x.on?"7A1F2B":"888888"})+wR(" "+x.x+"    ",{b:x.on?1:0,c:x.on?"222222":"666666"})}).join(""),{a:0});
   else c=wP(sg,{a:0});
-  var cells=[wC(wP(wR((i+1)+". "+row.l,{b:1,c:"7A1F2B"}),{a:0}),2900,{fill:LB}),wC(c,4500,{fill:i%2?"FCF9F2":"FFFFFF"})];
+  var cells=[wC(wP(wR((i+1)+". "+row.l,{b:1,c:"7A1F2B"}),{a:0}),2900,{fill:LB}),wC(c,4500)];
   cells.push(i===0?wC(wP(wR("የአባሉ ፎቶ",{b:1,c:"7A1F2B"}),{jc:"center",a:120})+fr+wP("",{a:0}),2238,{vm:"restart",va:"top",fill:"FCF9F2"}):wC("",2238,{vm:"cont",fill:"FCF9F2"}));
   return cells});
  o+=wT([2900,4500,2238],rows)+wP("",{a:60});
@@ -571,10 +571,10 @@ function docxForm(it,idx,dr,drM,wm){var r=it.src,m=formModel(it),LB="F7F1E5",o="
 function docxParts(list,map){var media=[],rel="",dn=0;
  function dr(id,mw,mh){return drM(id&&map[id],mw,mh)}
  var wmRid="";
- function wm(){if(typeof WMP==="undefined"||!WMP)return"";
+ function wm(stu){if(typeof WMP==="undefined"||!WMP)return"";
   if(!wmRid){wmRid="rIdWm";media.push({n:"wm.jpg",b:WMP.split(",")[1]});rel+='<Relationship Id="rIdWm" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/wm.jpg"/>'}
-  dn++;var cx=2300000,cy=Math.round(cx*WMPH/WMPW),y=8300000;
-  return'<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="'+dn+'" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:align>center</wp:align></wp:positionH><wp:positionV relativeFrom="page"><wp:posOffset>'+y+'</wp:posOffset></wp:positionV><wp:extent cx="'+cx+'" cy="'+cy+'"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/><wp:docPr id="'+dn+'" name="Watermark '+dn+'"/><wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="'+dn+'" name="wm.jpg"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdWm"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="'+cx+'" cy="'+cy+'"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'}
+  dn++;var cx=2160000,cy=Math.round(cx*WMPH/WMPW),y=stu?4000000:3546000,x=2844000;
+  return'<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="'+dn+'" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>'+x+'</wp:posOffset></wp:positionH><wp:positionV relativeFrom="page"><wp:posOffset>'+y+'</wp:posOffset></wp:positionV><wp:extent cx="'+cx+'" cy="'+cy+'"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/><wp:docPr id="'+dn+'" name="Watermark '+dn+'"/><wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="'+dn+'" name="wm.jpg"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdWm"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="'+cx+'" cy="'+cy+'"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'}
  function drM(m,mw,mh){if(!m)return"";var mt=/^data:image\/(png|jpeg|jpg);base64,(.*)$/.exec(m.d);if(!mt)return"";
   dn++;var ext=mt[1]==="png"?"png":"jpg",nm="img"+dn+"."+ext,rid="rIdImg"+dn,f=fit(m.w,m.h,mw,mh),cx=f[0]*9525,cy=f[1]*9525;
   media.push({n:nm,b:mt[2]});rel+='<Relationship Id="'+rid+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/'+nm+'"/>';
